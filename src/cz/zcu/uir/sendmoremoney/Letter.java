@@ -4,7 +4,8 @@
 package cz.zcu.uir.sendmoremoney;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Jan Dvorak A13B0293P
@@ -15,7 +16,7 @@ public class Letter {
 	
 	private final char letter;
 	private int value = DEFAULT_VALUE;
-	private final List<Integer> possibilities = Arrays.asList(new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+	private final Set<Integer> possibilities = new HashSet<Integer>(Arrays.asList(new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}));
 	
 	public Letter(char letter) {
 		this.letter = letter;
@@ -33,7 +34,7 @@ public class Letter {
 		return letter;
 	}
 	
-	public List<Integer> getPossibilities() {
+	public Set<Integer> getPossibilities() {
 		return possibilities;
 	}
 

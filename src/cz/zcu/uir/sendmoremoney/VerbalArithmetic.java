@@ -11,6 +11,7 @@ import java.util.Map;
  *
  */
 public class VerbalArithmetic {
+	private static final String PARSE_EXCEPTION_MESSAGE = "This exception is not valid.";
 	private final Map<Character, Letter> uniqueLetters = new HashMap<Character, Letter>();
 	
 	private Letter[] leftOperand;
@@ -25,12 +26,16 @@ public class VerbalArithmetic {
 		String[] split = expression.toUpperCase().split("=");
 		
 		if(split.length != 2){
-			throw new IllegalArgumentException("Not valid expression");
+			throw new IllegalArgumentException(PARSE_EXCEPTION_MESSAGE);
 		}
 		
 		this.result = createOperand(split[1].trim());
 		
 		String[] operands = split[0].split("\\+");
+		
+		if(operands.length != 2){
+			throw new IllegalArgumentException(PARSE_EXCEPTION_MESSAGE);
+		}
 		
 		this.leftOperand = createOperand(operands[0].trim());
 		this.rightOperand = createOperand(operands[1].trim());
@@ -43,6 +48,10 @@ public class VerbalArithmetic {
 		char tmp;
 		for(int i = 0; i < n; i++){
 			tmp = operand.charAt(i);
+			
+			if(tmp == ' '){
+				throw new IllegalArgumentException(PARSE_EXCEPTION_MESSAGE);
+			}
 			
 			if(uniqueLetters.containsKey(tmp)){
 				letters[i] = uniqueLetters.get(tmp);
@@ -72,6 +81,15 @@ public class VerbalArithmetic {
 	public int fitting(){
 		return valueOfOperand(leftOperand) + valueOfOperand(rightOperand)
 				- valueOfOperand(result);
+	}
+	
+	public boolean isValid(){
+		if(leftOperand[0].getValue() == 0 || rightOperand[0].getValue() == 0
+				|| result[0].getValue() == 0){
+			return false;
+		} else {
+			return fitting() == 0;
+		}
 	}
 	
 	private String printLetters(Letter[] letters){
