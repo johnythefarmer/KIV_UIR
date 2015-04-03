@@ -3,8 +3,8 @@
  */
 package cz.zcu.uir.sendmoremoney;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author Jan Dvorak A13B0293P
@@ -12,14 +12,29 @@ import java.util.Map;
  */
 public class VerbalArithmetic {
 	private static final String PARSE_EXCEPTION_MESSAGE = "This exception is not valid.";
-	private final Map<Character, Letter> uniqueLetters = new HashMap<Character, Letter>();
+	
+	private final Map<Character, Letter> uniqueLetters;
 	
 	private Letter[] leftOperand;
 	private Letter[] rightOperand;
 	private Letter[] result;
 	
 	public VerbalArithmetic(String expression){
+		uniqueLetters = new TreeMap<Character, Letter>();
 		parseExpression(expression);
+		initializeIndexes();
+	}
+	
+	public Map<Character, Letter> getUniqueLetters() {
+		return uniqueLetters;
+	}
+
+	private void initializeIndexes(){
+		int i = 0;
+		
+		for(Letter l : uniqueLetters.values()){
+			l.setIndex(i++);
+		}
 	}
 	
 	private void parseExpression(String expression){
@@ -66,30 +81,30 @@ public class VerbalArithmetic {
 		return letters;
 	}
 	
-	private int valueOfOperand(Letter[] operand){
+	private int valueOfOperand(Letter[] operand, int[] configuration){
 		int sum = 0;
 		
 		int n = operand.length;
 		for(int i = 0; i < n; i++){
 			sum *= 10;
-			sum += operand[i].getValue();
+			sum += configuration[operand[i].getIndex()];
 		}
 		
 		return sum;
 	}
 	
-	public int fitting(){
-		return valueOfOperand(leftOperand) + valueOfOperand(rightOperand)
-				- valueOfOperand(result);
+	public int fitting(int[] configuration){
+		int leftOpValue = valueOfOperand(leftOperand, configuration);
+		int rightOpValue = valueOfOperand(rightOperand, configuration);
+		int resultValue = valueOfOperand(result, configuration);
+		
+//		System.out.println(leftOpValue + " + " + rightOpValue + " = " + resultValue);
+		
+		return leftOpValue + rightOpValue - resultValue;
 	}
 	
-	public boolean isValid(){
-		if(leftOperand[0].getValue() == 0 || rightOperand[0].getValue() == 0
-				|| result[0].getValue() == 0){
-			return false;
-		} else {
-			return fitting() == 0;
-		}
+	public boolean isValid(int[] configuration){
+		return fitting(configuration) == 0;
 	}
 	
 	private String printLetters(Letter[] letters){

@@ -12,22 +12,22 @@ import java.util.Set;
  *
  */
 public class Letter {
-	private static final int DEFAULT_VALUE = 0;
+	private static final int DEFAULT_INDEX = 0;
 	
 	private final char letter;
-	private int value = DEFAULT_VALUE;
+	private int index = DEFAULT_INDEX;
 	private final Set<Integer> possibilities = new HashSet<Integer>(Arrays.asList(new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}));
 	
 	public Letter(char letter) {
 		this.letter = letter;
 	}
 	
-	public int getValue() {
-		return value;
+	public int getIndex() {
+		return index;
 	}
 
-	public void setValue(int value) {
-		this.value = value;
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 	public char getLetter() {
@@ -39,7 +39,7 @@ public class Letter {
 	}
 
 	public String toString(){
-		return letter + "(" + value + ") ";
+		return letter + "(" + index + ") ";
 	}
 
 	@Override
