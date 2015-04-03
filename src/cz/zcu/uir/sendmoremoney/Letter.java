@@ -3,9 +3,6 @@
  */
 package cz.zcu.uir.sendmoremoney;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Jan Dvorak A13B0293P
@@ -16,8 +13,8 @@ public class Letter {
 	
 	private final char letter;
 	private int index = DEFAULT_INDEX;
-	private final Set<Integer> possibilities = new HashSet<Integer>(Arrays.asList(new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}));
-	
+	private boolean isFirstLetter = false;
+
 	public Letter(char letter) {
 		this.letter = letter;
 	}
@@ -33,9 +30,13 @@ public class Letter {
 	public char getLetter() {
 		return letter;
 	}
-	
-	public Set<Integer> getPossibilities() {
-		return possibilities;
+
+	public boolean isFirstLetter() {
+		return isFirstLetter;
+	}
+
+	public void setFirstLetter(boolean isFirstLetter) {
+		this.isFirstLetter = isFirstLetter;
 	}
 
 	public String toString(){

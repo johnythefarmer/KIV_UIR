@@ -78,6 +78,9 @@ public class VerbalArithmetic {
 			}
 		}
 		
+		//first letter cant be zero
+		letters[0].setFirstLetter(true);
+		
 		return letters;
 	}
 	
