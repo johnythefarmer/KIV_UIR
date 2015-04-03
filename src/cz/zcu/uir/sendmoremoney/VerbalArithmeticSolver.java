@@ -15,4 +15,6 @@ public interface VerbalArithmeticSolver {
 	 * @return solved arangment of values for given expression
 	 */
 	int[] solveVerbalArithmetic(String expression);
+	
+	int[] solveVerbalArithmetic(VerbalArithmetic va);
 }
