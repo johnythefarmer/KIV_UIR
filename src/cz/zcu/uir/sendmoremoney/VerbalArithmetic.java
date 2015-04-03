@@ -120,8 +120,16 @@ public class VerbalArithmetic {
 		return sb.toString();
 	}
 	
+	public String printConfigurationResult(int[] configuration){
+		int leftOpValue = valueOfOperand(leftOperand, configuration);
+		int rightOpValue = valueOfOperand(rightOperand, configuration);
+		int resultValue = valueOfOperand(result, configuration);
+		
+		return leftOpValue + "+" + rightOpValue + "=" + resultValue;
+	}
+	
 	public String toString(){
-		return printLetters(leftOperand) + "\t+ \t" + printLetters(rightOperand)
-				+ "\t= \t" + printLetters(result);
+		return printLetters(leftOperand) + "+" + printLetters(rightOperand)
+				+ "=" + printLetters(result);
 	}
 }

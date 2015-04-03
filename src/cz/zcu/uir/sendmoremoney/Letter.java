@@ -40,7 +40,7 @@ public class Letter {
 	}
 
 	public String toString(){
-		return letter + "(" + index + ") ";
+		return letter + "";
 	}
 
 	@Override

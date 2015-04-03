@@ -41,8 +41,13 @@ public class VerbalArithmeticBacktrackingSolver implements
 		boolean found = findRightConfiguration(configuration, 0);
 		
 		if(found){
+			System.out.println("found correct configuration:");
+			for(int i = 0; i < letterCount; i++){
+				System.out.println(" \u2022 " + letters[i] + " => " + configuration[i]);
+			}
 			return configuration;
 		} else {
+			System.out.println("no correct configuration was found");
 			return null;
 		}
 		
